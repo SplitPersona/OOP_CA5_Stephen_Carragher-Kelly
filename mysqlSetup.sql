@@ -1,5 +1,5 @@
 CREATE TABLE weapons (
-    ID INT PRIMARY KEY,
+    ID INT AUTO_INCREMENT PRIMARY KEY,
     Name VARCHAR(255) NOT NULL,
     Attack INT,
     Weight FLOAT,

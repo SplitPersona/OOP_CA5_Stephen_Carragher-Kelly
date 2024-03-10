@@ -138,7 +138,7 @@ public class DAO
     {
         Connection conn = getConnection(); // Connects to database
         String query = "INSERT INTO Weapons (Name, Attack, Weight, Location) VALUES (?,?,?,?)"; //creates the query for the insert statement
-        PreparedStatement stmt = conn.prepareStatement(query); 
+        PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
         stmt.setString(1, weapon.getName());
         stmt.setInt(2, weapon.getAttack());
@@ -146,12 +146,6 @@ public class DAO
         stmt.setString(4, weapon.getLocation());
         
         stmt.executeUpdate(); // Executes the statement
-        int affectedRows = stmt.executeUpdate();
-
-        if(affectedRows == 0)
-        {
-            System.out.println("Insert failed"); //will display if no rows were effected
-        }
         
         ResultSet generatedKeys  = stmt.getGeneratedKeys(); //gets any auto-generated keys
         if(generatedKeys.next())
