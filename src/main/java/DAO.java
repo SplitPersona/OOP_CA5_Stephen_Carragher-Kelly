@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DAO
@@ -144,9 +145,9 @@ public class DAO
         stmt.setInt(2, weapon.getAttack());
         stmt.setFloat(3, weapon.getWeight());
         stmt.setString(4, weapon.getLocation());
-        
+
         stmt.executeUpdate(); // Executes the statement
-        
+
         ResultSet generatedKeys  = stmt.getGeneratedKeys(); //gets any auto-generated keys
         if(generatedKeys.next())
         {
@@ -160,6 +161,89 @@ public class DAO
 
         System.out.println("Weapon inserted successfully with ID: " + weapon.getID());
         conn.close();
+    }
+
+    /**
+     * Main author: Michal Becmer
+     * Other contributors:
+     **/
+    public DS_Weapons update(int id, DS_Weapons weapon) throws SQLException{
+
+        //connects to database
+        Connection conn = getConnection();
+        //defines the needed sql query
+        String query = "UPDATE Weapons SET Name=?, Attack=?, Weight=?, Location=? WHERE ID=?";
+        //prepares sql statement
+        PreparedStatement stmt = conn.prepareStatement(query);
+        //sets all the parameters to ? assumes the parameters is its respected type
+        stmt.setString(1, weapon.getName());//for example assumes this is a string using .setString
+        stmt.setInt(2, weapon.getAttack());
+        stmt.setFloat(3, weapon.getWeight());
+        stmt.setString(4, weapon.getLocation());
+        stmt.setInt(5, id);
+
+        //executes operation
+        int affectedRows = stmt.executeUpdate();
+
+        //closes the prepared statement and database connection
+        stmt.close();
+        conn.close();
+
+        //checking if update is successful
+        if(affectedRows > 0)
+        {
+            System.out.println("Weapon with ID " + id+ " has been successfully updated!");
+            return null;//returns null if no weapon was found
+        }
+        else
+        {
+            System.out.println("Weapon not found!");
+            return null;//return null if no weapon was found with given id
+        }
+
+    }
+
+    /**
+     * Main author: Stephen Carragher Kelly
+     * Other contributors:
+     **/
+    public List<DS_Weapons> getWeaponByFilter(String filterCriteria, float filterValue) throws SQLException
+    {
+        List<DS_Weapons> weapons = new ArrayList<>();
+        Connection conn = getConnection();
+
+        String query = "SELECT * FROM Weapons WHERE ";
+
+        if ("attack".equalsIgnoreCase(filterCriteria))
+        {
+            query += "Attack = ?";
+        }
+        else if ("weight".equalsIgnoreCase(filterCriteria))
+        {
+            query += "Weight = ?";
+        }
+        else
+        {
+            throw new IllegalArgumentException("Invalid filter criteria: " + filterCriteria);
+        }
+
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setFloat(1, filterValue);
+
+        ResultSet results = stmt.executeQuery();
+
+        while (results.next()) {
+            DS_Weapons weapon = new DS_Weapons();
+            weapon.setID(results.getInt("ID"));
+            weapon.setName(results.getString("Name"));
+            weapon.setAttack(results.getInt("Attack"));
+            weapon.setWeight(results.getFloat("Weight"));
+            weapon.setLocation(results.getString("Location"));
+            weapons.add(weapon);
+        }
+
+        conn.close();
+        return weapons;
     }
 
     public User logIn(String username, String password) throws SQLException

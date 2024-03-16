@@ -7,9 +7,6 @@ public class DS_Weapons {
     private float Weight;
     private String Location;
 
-    public DS_Weapons() {
-    }
-
     public int getID() {
         return ID;
     }
