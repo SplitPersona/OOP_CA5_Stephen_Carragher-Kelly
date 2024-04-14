@@ -18,6 +18,13 @@ import java.util.Scanner;
  * - Stephen did Feature 4
  * - Michal did Feature 5
  * - Stephen did Feature 6
+ * - Michal did Feature 7
+ * - Stephen did Feature 8
+ * - Michal completed Junit testing
+ * - Stephen set up the client and server
+ * - Stephen did Feature 9
+ * - Stephen did Feature 10
+ * - Stephen did Feature 11
  * */
 
 /**
