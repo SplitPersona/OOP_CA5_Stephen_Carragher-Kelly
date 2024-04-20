@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.Socket;
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,29 +31,30 @@ public class Client
             //ask user to enter a command
             Scanner consoleInput = new Scanner(System.in);
 
-            //while(true)
-            //{
             /**
              * Main author: Stephen Carragher Kelly
              **/
-                System.out.println("Please enter any of the following commands in the correct format.");
-                System.out.println("ViewID:<ID>");
-                System.out.println("ViewAll");
-                System.out.println("AddEntity");
-                System.out.println("Please enter a command: ");
-                String userRequest = consoleInput.nextLine();
-                // send the command to the server on the socket
-                //out.println(userRequest);      // write the request to socket along with a newline terminator (which is required)
-                // out.flush();                      // flushing buffer NOT necessary as auto flush is set to true
+            System.out.println("---------------------------");
+            System.out.println("Please enter any of the following commands in the correct format.");
+            System.out.println("---------------------------");
+            System.out.println("ViewID:<ID>");
+            System.out.println("ViewAll");
+            System.out.println("AddEntity");
+            System.out.println("DeleteID:<ID>");
+            System.out.println("Exit");
+            System.out.println("Please enter a command: ");
+            System.out.println("---------------------------");
+            String userRequest = consoleInput.nextLine();
+            // send the command to the server on the socket
+            // out.println(userRequest);      // write the request to socket along with a newline terminator (which is required)
+            // out.flush();                      // flushing buffer NOT necessary as auto flush is set to true
 
-                //if (userRequest.equalsIgnoreCase("Exit")) {
-                //    break; // Exit the loop if user types "Exit"
-                //}
-                // process the answer returned by the server
-                //
             /**
              * Main author: Stephen Carragher Kelly
              **/
+
+            while(true)
+            {
                 if(userRequest.startsWith("ViewID"))
                 {
                     out.println(userRequest);
@@ -122,14 +124,39 @@ public class Client
                     String response;
                     System.out.println(response = in.readLine());
                 }
+                else if(userRequest.startsWith("DeleteID"))
+                {
+                    out.println(userRequest);
+                    String response = in.readLine();
+                    System.out.println(response);
+                }
+                else if (userRequest.startsWith("Exit"))
+                {
+                    out.println(userRequest);
+                    String response = in.readLine();
+                    System.out.println("Client message: Response from server: \"" + response + "\"");
+                    break;
+                }
                 else
                 {
                     System.out.println("Invaid request");
                 }
 
-            }
+                consoleInput = new Scanner(System.in);
+                System.out.println("---------------------------");
+                System.out.println("Please enter any of the following commands in the correct format.");
+                System.out.println("---------------------------");
+                System.out.println("ViewID:<ID>");
+                System.out.println("ViewAll");
+                System.out.println("AddEntity");
+                System.out.println("DeleteID:<ID>");
+                System.out.println("Exit");
+                System.out.println("Please enter a command: ");
+                System.out.println("---------------------------");
+                userRequest = consoleInput.nextLine();
 
-        //}
+            }
+        }
         catch (IOException e)
         {
             System.out.println("Client message: IOException: " + e);

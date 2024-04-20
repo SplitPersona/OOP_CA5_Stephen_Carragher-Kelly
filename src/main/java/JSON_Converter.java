@@ -4,6 +4,20 @@ import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
 
 public class JSON_Converter {
+
+    private static  JSON_Converter Instance;
+    Gson gson;
+    private JSON_Converter(){this.gson = new Gson(); }
+
+    public static synchronized JSON_Converter getInstance()
+    {
+        if(Instance == null)
+        {
+            Instance = new JSON_Converter();
+        }
+        return Instance;
+    }
+
     /**
      * Main author: Michal Becmer
      **/

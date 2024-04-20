@@ -25,11 +25,14 @@ import java.util.Scanner;
  * - Stephen did Feature 9
  * - Stephen did Feature 10
  * - Stephen did Feature 11
+ * - Stephen did Feature 12
+ * - Michal did Feature 13
+ * - Michal did Feature 14
  * */
 
 /**
  * Main author: Michal Becmer
- * Other contributors:
+ * Other contributors: Stephen Carragher Kelly
  **/
 
 public class MainApp {
