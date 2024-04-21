@@ -4,20 +4,6 @@ import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
 
 public class JSON_Converter {
-
-    private static  JSON_Converter Instance;
-    Gson gson;
-    private JSON_Converter(){this.gson = new Gson(); }
-
-    public static synchronized JSON_Converter getInstance()
-    {
-        if(Instance == null)
-        {
-            Instance = new JSON_Converter();
-        }
-        return Instance;
-    }
-
     /**
      * Main author: Michal Becmer
      **/
@@ -45,4 +31,10 @@ public class JSON_Converter {
         Type listType = TypeToken.getParameterized(List.class, typeClass).getType();
         return gson.fromJson(jsonString, listType);
     }
+
+    //converts an array of strings to a json string
+    public static String arrayToJsonString(String[] array) {
+        return new Gson().toJson(array);
+    }
+
 }

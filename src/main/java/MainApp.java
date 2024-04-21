@@ -20,19 +20,10 @@ import java.util.Scanner;
  * - Stephen did Feature 6
  * - Michal did Feature 7
  * - Stephen did Feature 8
- * - Michal completed Junit testing
- * - Stephen set up the client and server
- * - Stephen did Feature 9
- * - Stephen did Feature 10
- * - Stephen did Feature 11
- * - Stephen did Feature 12
- * - Michal did Feature 13
- * - Michal did Feature 14
  * */
 
 /**
  * Main author: Michal Becmer
- * Other contributors: Stephen Carragher Kelly
  **/
 
 public class MainApp {
@@ -192,7 +183,6 @@ public class MainApp {
                     case 6:
                         /**
                          * Main author: Stephen Carragher Kelly
-                         * Other contributors:
                          **/
                         filterWeaponsByCriteria(dao);
                         break;
@@ -202,7 +192,6 @@ public class MainApp {
                     case 8:
                         /**
                          * Main author: Stephen Carragher Kelly
-                         * Other contributors:
                          **/
                         System.out.println("Enter the ID of the weapon you would like to see as a JSON String");
                         int weaponID = in.nextInt();
@@ -217,7 +206,6 @@ public class MainApp {
                         {
                             System.out.println("Weapon not found for ID: " + weaponID);
                         }
-                        break;
                     case 99:
                         System.out.println("Exiting...");
                         break;
@@ -230,7 +218,6 @@ public class MainApp {
 
     /**
      * Main author: Michal Becmer
-     * Other contributors:
      **/
 
     private static void ShowAllWeapons(DAO dao) throws SQLException {
@@ -247,7 +234,6 @@ public class MainApp {
 
     /**
      * Main author: Stephen Carragher Kelly
-     * Other contributors:
      **/
     private static void filterWeaponsByCriteria(DAO dao) throws SQLException
     {
